@@ -14,10 +14,10 @@ public class Vehicle {
 
 	Vehicle() {
 		length = 0;
-		location = null;
+		location = new ArrayList<Float>();
 		
 		speed = 0;
-		direction = null;
+		direction = new ArrayList<Float>();
 	}
 	
 	Vehicle(float length, ArrayList<Float> location, float speed, ArrayList<Float> direction) throws InvalidParameterException{
