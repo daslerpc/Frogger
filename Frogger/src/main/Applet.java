@@ -1,4 +1,4 @@
-package view;
+package main;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Container;
@@ -12,6 +12,9 @@ import javax.swing.JApplet;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import javax.swing.JLabel;
+
+import view.Controls;
+import view.Display;
 
 public class Applet extends JApplet {
 	

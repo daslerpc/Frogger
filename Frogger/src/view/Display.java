@@ -6,7 +6,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class Display extends JPanel {
-	Display() {
+	public Display() {
 		setBackground(Color.BLACK);
 		JLabel lbl = new JLabel("Display");
 		lbl.setForeground(Color.WHITE);
