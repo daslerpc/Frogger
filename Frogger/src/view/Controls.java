@@ -3,6 +3,8 @@ package view;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
@@ -19,9 +21,11 @@ import javax.swing.JTabbedPane;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import model.Sim;
 
 
-public class Controls extends JPanel implements ItemListener, ChangeListener {
+
+public class Controls extends JPanel implements ItemListener, ChangeListener, ActionListener {
 	JCheckBox svFilterDisplay;
 	JCheckBox synchrosDisplay;
 	JSlider stepSize;
@@ -38,6 +42,8 @@ public class Controls extends JPanel implements ItemListener, ChangeListener {
 	
 	JLabel stepLabel;
 	int timestep = 1;
+	
+	boolean play = false;
 	
 	public Controls() {
 		setBorder(BorderFactory.createLineBorder(Color.BLACK));
@@ -102,12 +108,15 @@ public class Controls extends JPanel implements ItemListener, ChangeListener {
 		
 		
         stepB = new JButton("<");
+        stepB.addActionListener(this);
         panel.add(stepB);
         
-        start = new JButton("Start Sim");
+        start = new JButton(" Start Sim ");
+        start.addActionListener(this);
         panel.add(start);
         
         stepF = new JButton(">");
+        stepF.addActionListener(this);
         panel.add(stepF);
         
 		return panel;
@@ -119,8 +128,7 @@ public class Controls extends JPanel implements ItemListener, ChangeListener {
 		 
         if (source == svFilterDisplay) {
             displayFilter = !displayFilter;
-        }
-        else if (source == synchrosDisplay) {
+        } else if (source == synchrosDisplay) {
             displaySynchs = !displaySynchs;
         }
 	}
@@ -133,6 +141,25 @@ public class Controls extends JPanel implements ItemListener, ChangeListener {
 	        timestep = (int)source.getValue();   
 	        stepLabel.setText("Time Step Size = " + timestep);
 	    }
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+		Object source = arg0.getSource();
+		if (source == stepB) {
+			Sim.getInstance().stepSim(-timestep);
+			Display.getInstance().repaint();
+		} else if (source == start) {
+			play = !play;
+			if (play) {
+				start.setText("Pause Sim");
+			} else {
+				start.setText(" Start Sim ");
+			}
+		} else if (source == stepF) {
+			Sim.getInstance().stepSim(timestep);
+			Display.getInstance().repaint();
+		}
 	}
 	
 }

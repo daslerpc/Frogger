@@ -3,6 +3,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.Graphics2D;
 import java.awt.GridLayout;
 import java.awt.Window;
 
@@ -13,8 +14,10 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import javax.swing.JLabel;
 
+import model.Sim;
 import view.Controls;
 import view.Display;
+
 
 public class Applet extends JApplet {
 	
@@ -41,14 +44,13 @@ public class Applet extends JApplet {
 
                 	setLayout(new BoxLayout(getContentPane(), BoxLayout.X_AXIS));
                 	
-                    Display display = new Display();
                     Controls controls = new Controls();
                     
                     controls.setMinimumSize(new Dimension(300, Short.MAX_VALUE));
                     controls.setPreferredSize(new Dimension(300, Short.MAX_VALUE));
                     controls.setMaximumSize(new Dimension(300, Short.MAX_VALUE));
     
-                    add(display);
+                    add(Display.getInstance());
                     add(controls);
                     
                 }
