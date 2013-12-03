@@ -10,12 +10,8 @@ public class Sim {
 	
 	ArrayList<Vehicle> vehicles;
 
-	private Sim() {
-		vehicles = new ArrayList<Vehicle> ();
-		
-		for( int var=0; var<6; var++)
-			addVariable(var);
-		
+	public Sim() {
+		vehicles = new ArrayList<Vehicle> ();	
 	}
 	
 	public void addVariable(int index) {
@@ -76,5 +72,13 @@ public class Sim {
 	public void paint(Graphics2D g) {
 		for( int index=0; index < vehicles.size(); index++) 
 			vehicles.get(index).paint(g);
+	}
+	
+	public boolean doCollisionsExist() {
+		boolean collision_state = false;
+		
+		
+		
+		return collision_state;
 	}
 }
