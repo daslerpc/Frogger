@@ -1,12 +1,13 @@
 package model;
 import java.awt.Color;
-import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.security.InvalidParameterException;
 import java.util.ArrayList;
 
+import view.Display;
 
-public class Vehicle {
+
+public class Vehicle implements Traffic {
 	private float length;
 	private ArrayList<Float> location;
 	
@@ -56,19 +57,25 @@ public class Vehicle {
 		this(length, location, speed, direction, Color.WHITE);
 	}
 	
-	void updatePosition(float timestep) {
+	@Override
+	public void updatePosition(float timestep) {
 		for(int index = 0; index < location.size(); index++)
 			location.set(index, location.get(index) + direction.get(index) * speed * timestep);
 	}
 	
-	void paint(Graphics2D g) {
-		int headX = Math.round(location.get(0));
-		int headY = Math.round(location.get(1));
-		int tailX = Math.round(headX + direction.get(0)*length);
-		int tailY = Math.round(headY + direction.get(1)*length);
+	@Override
+	public void paint(Graphics2D g) {
+		int headX = Math.round(location.get(0)) + Display.getInstance().getCameraX();
+		int headY = Math.round(location.get(1)) + Display.getInstance().getCameraY();
+		int tailX = Math.round(headX + direction.get(0)*length) + Display.getInstance().getCameraX();
+		int tailY = Math.round(headY + direction.get(1)*length) + Display.getInstance().getCameraY();
 		
 		g.setColor(color);
 		g.drawLine(headX, headY, tailX, tailY);
+	}
+	
+	public void setColor( Color color ) {
+		this.color = color;
 	}
 }
 

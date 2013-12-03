@@ -1,20 +1,31 @@
 package model;
 
-import java.awt.Color;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Random;
+
+import view.Display;
 
 public class Sim {
 	private static final Sim INSTANCE = new Sim();
 	
-	ArrayList<Vehicle> vehicles;
+	ArrayList<Traffic> vehicles;
+	int numvar;
+	int numclause;
 
 	public Sim() {
-		vehicles = new ArrayList<Vehicle> ();	
+		vehicles = new ArrayList<Traffic> ();	
+		numvar = 0;
+		numclause = 0;
 	}
 	
-	public void addVariable(int index) {
+	public void addVariable() {
+		Random rand = new Random();
+		int randomNum = rand.nextInt()%2;
+		addVariable(randomNum==1);
+	}
+	
+	public void addVariable(boolean startVal) {
 		int y_offset = 200;
 		
 		ArrayList<Float> direction = new ArrayList<Float>();	
@@ -23,17 +34,13 @@ public class Sim {
 		
 		ArrayList<Float> location = new ArrayList<Float>();
 		location.add(0f);
-		location.add(y_offset + 60f + index * 60.0f);
+		location.add(y_offset + 60f + numvar * 60.0f);
 		
 		int length = 10;
 		int speed = 10;
-		
-		vehicles.add( new Vehicle(length, location, speed, direction, Color.RED) );
-		
-		location.clear();
-		location.add(0f);
-		location.add(y_offset + 40f + index * 60.0f);
-		vehicles.add( new Vehicle(length, location, speed, direction, Color.GREEN) );
+
+		vehicles.add( new Bit(length, location, speed, direction, startVal) );
+
 		
 		direction.clear();
 		direction.add(0f);
@@ -41,23 +48,36 @@ public class Sim {
 		
 		
 		
+		ArrayList<Vehicle> cars = new ArrayList<Vehicle>();
 		location.clear();
 		location.add(30f);
-		location.add(y_offset + 20f + index * 60.0f);
-		vehicles.add( new Vehicle(length, location, speed, direction) );
+		location.add(y_offset + 20f + numvar * 60.0f);
+		cars.add( new Vehicle(length, location, speed, direction) );
 		
 		length = 30;
 		
 		location.clear();
 		location.add(10f);
-		location.add(y_offset + index * 60.0f);
-		vehicles.add( new Vehicle(length, location, speed, direction) );
+		location.add(y_offset + numvar * 60.0f);
+		cars.add( new Vehicle(length, location, speed, direction) );
 		
 		location.clear();
 		location.add(40f);
-		location.add(y_offset + 30f + index * 60.0f);
-		vehicles.add( new Vehicle(length, location, speed, direction) );
+		location.add(y_offset + 30f + numvar * 60.0f);
+		cars.add( new Vehicle(length, location, speed, direction) );
 		
+		vehicles.add(new WolfPack(cars) );	
+		
+		numvar++;
+		Display.getInstance().repaint();
+	}
+	
+	public void addClause() {
+		// TODO Auto-generated method stub
+		
+		
+		numclause++;
+		Display.getInstance().repaint();
 	}
 	
 	public static Sim getInstance() {
@@ -81,4 +101,5 @@ public class Sim {
 		
 		return collision_state;
 	}
+
 }

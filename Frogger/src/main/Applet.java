@@ -1,27 +1,23 @@
 package main;
-import java.awt.Color;
-import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
-import java.awt.Graphics2D;
-import java.awt.GridLayout;
 import java.awt.Window;
 
-import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JApplet;
-import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
-import javax.swing.JLabel;
-
-import model.Sim;
 import view.Controls;
 import view.Display;
 
 
 public class Applet extends JApplet {
 	
-    //Called when this applet is loaded into the browser.
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	//Called when this applet is loaded into the browser.
     public void init() {
         //Execute a job on the event-dispatching thread; creating this applet's GUI.
         try {
