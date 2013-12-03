@@ -1,0 +1,11 @@
+c
+c start with comments
+c
+c 
+c The "p cnf" line means that this is SAT problem in CNF format with 5 variables and 3 clauses. 
+c The first line after it is the first clause, meaning (x1 OR NOT x5 OR x4)
+c Each clause is ended with a 0
+p cnf 5 3
+1 -5 4 0
+-1 5 3 4 0
+-3 -4 0

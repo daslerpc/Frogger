@@ -1,0 +1,5 @@
+c This is a test file for reading in a 3-SAT problem in the DIMACS format.
+p cnf 5 3
+1 -5 4 0
+-1 5 3 0
+-3 -4 2 0
