@@ -235,6 +235,7 @@ public class Controls extends JPanel implements ItemListener, ChangeListener, Ac
 		} else if (source == zoomIn) {
 		} else if (source == zoomOut) {
 		} else if (source == center) {
+			Display.getInstance().center();
 		} else if (source == fit) {
 		}
 	}

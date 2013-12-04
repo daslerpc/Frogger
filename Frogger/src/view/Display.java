@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
 import javax.swing.JLabel;
@@ -11,7 +12,7 @@ import javax.swing.JPanel;
 
 import model.Sim;
 
-public class Display extends JPanel implements MouseMotionListener{
+public class Display extends JPanel implements MouseListener, MouseMotionListener{
 	/**
 	 * 
 	 */
@@ -39,6 +40,7 @@ public class Display extends JPanel implements MouseMotionListener{
 		lbl.setForeground(Color.WHITE);
 		add(lbl);
 		
+		addMouseListener(this);
 		addMouseMotionListener(this);
 	}
 	
@@ -67,14 +69,54 @@ public class Display extends JPanel implements MouseMotionListener{
 	@Override
 	public void mouseDragged(MouseEvent arg0) {
 		// TODO Auto-generated method stub
-		System.out.println(arg0.getX());
 		
+		cameraX += moveCamX - arg0.getX();
+		cameraY += moveCamY - arg0.getY();
+		
+		moveCamX = arg0.getX();
+		moveCamY = arg0.getY();
+		
+		repaint();
 	}
 
 	@Override
 	public void mouseMoved(MouseEvent arg0) {
 		// TODO Auto-generated method stub
-		
 	}
 
+	@Override
+	public void mouseClicked(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public void mouseExited(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public void mousePressed(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+		moveCamX = arg0.getX();
+		moveCamY = arg0.getY();
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		moveCamX = 0;
+		moveCamY = 0;
+	}
+
+	public void center() {
+		cameraX = 0;
+		cameraY = 0;
+		repaint();
+	}
 }
