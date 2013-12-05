@@ -65,10 +65,13 @@ public class Vehicle implements Traffic {
 	
 	@Override
 	public void paint(Graphics2D g) {
-		int headX = Math.round(location.get(0)) + Display.getInstance().getCameraX();
-		int headY = Math.round(location.get(1)) + Display.getInstance().getCameraY();
-		int tailX = Math.round(headX + direction.get(0)*length) + Display.getInstance().getCameraX();
-		int tailY = Math.round(headY + direction.get(1)*length) + Display.getInstance().getCameraY();
+		int camX = Display.getInstance().getCameraX();
+		int camY = Display.getInstance().getCameraY();
+		
+		int headX = Math.round(location.get(0)) + camX;
+		int headY = Math.round(location.get(1)) + camY;
+		int tailX = Math.round(headX + direction.get(0)*length);
+		int tailY = Math.round(headY + direction.get(1)*length);
 		
 		g.setColor(color);
 		g.drawLine(headX, headY, tailX, tailY);

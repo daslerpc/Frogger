@@ -70,8 +70,8 @@ public class Display extends JPanel implements MouseListener, MouseMotionListene
 	public void mouseDragged(MouseEvent arg0) {
 		// TODO Auto-generated method stub
 		
-		cameraX += moveCamX - arg0.getX();
-		cameraY += moveCamY - arg0.getY();
+		cameraX -= moveCamX - arg0.getX();
+		cameraY -= moveCamY - arg0.getY();
 		
 		moveCamX = arg0.getX();
 		moveCamY = arg0.getY();
