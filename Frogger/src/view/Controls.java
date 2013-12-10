@@ -39,6 +39,7 @@ public class Controls extends JPanel implements ItemListener, ChangeListener, Ac
 	JButton addFVar;
 	JButton addRandVar;
 	JButton addClause;
+	JButton checkCollisions;
 	
 	JButton zoomIn;
 	JButton zoomOut;
@@ -156,6 +157,11 @@ public class Controls extends JPanel implements ItemListener, ChangeListener, Ac
         addTVar.addActionListener(this);
         panel.add(addTVar);
         
+        checkCollisions = new JButton("Check Collisions");
+        checkCollisions.setAlignmentX(Component.CENTER_ALIGNMENT);
+        checkCollisions.addActionListener(this);
+        panel.add(checkCollisions);
+        
         return panel;
 	}
 
@@ -232,6 +238,8 @@ public class Controls extends JPanel implements ItemListener, ChangeListener, Ac
 			Sim.getInstance().addVariable(true);
 		} else if (source == addClause) {
 			Sim.getInstance().addClause();
+		} else if (source == checkCollisions) {
+			Sim.getInstance().doCollisionsExist();
 		} else if (source == zoomIn) {
 		} else if (source == zoomOut) {
 		} else if (source == center) {

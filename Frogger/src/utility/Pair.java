@@ -1,7 +1,7 @@
 package utility;
 
 public class Pair<F, S> {
-    private F first; //first member of pair
+	private F first; //first member of pair
     private S second; //second member of pair
 
     public Pair(F first, S second) {
@@ -9,7 +9,7 @@ public class Pair<F, S> {
         this.second = second;
     }
 
-    public void setFirst(F first) {
+	public void setFirst(F first) {
         this.first = first;
     }
 
