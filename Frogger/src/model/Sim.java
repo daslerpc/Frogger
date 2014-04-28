@@ -10,50 +10,52 @@ import view.Display;
 
 public class Sim {
 	private static final Sim INSTANCE = new Sim();
+	public static final float UNIT = 10.0f;
 	
 	ArrayList<Vehicle> vehicles;
+	ArrayList<Boolean> values;
+	
 	int numvar;
 	int numclause;
 
 	public Sim() {
 		vehicles = new ArrayList<Vehicle> ();	
-		numvar = 0;
-		numclause = 0;
+		values = new ArrayList<Boolean> ();
+		numvar = 3;
+		numclause = 1;
 	}
 	
-	public void addVariable() {
+	public void addVariables(int num) {
 		Random rand = new Random();
 		int randomNum = rand.nextInt()%2;
-		addVariable(randomNum==1);
+	
+		for(int x=0; x<num; x++)
+			values.add(randomNum==1);
+		
+		addVariables(values);
 	}
 	
-	public void addVariable(boolean startVal) {
-		int y_offset = 200;
+	public void addVariables(ArrayList<Boolean> startVals) {
+		int numvar = startVals.size(); 
 		
-		OrderedPair direction = new OrderedPair(1f, 0f);	
+		for(int var = 0; var < numvar; var++) {
+			float length = UNIT;
+			float speed = UNIT;
+			
+			OrderedPair<Float> location = new OrderedPair<Float>(0f, var * 3*UNIT);
+			OrderedPair<Float> goal = new OrderedPair<Float>(0f, (numvar*2*numclause + var)*3*UNIT );		
+			
+			float startTime = 0f;
+			float deadline = (goal.getSecond() - location.getFirst())/UNIT - 1;
+	
+			vehicles.add( new Vehicle(length, location, goal, startTime, deadline, speed, startVals.get(var), "x_"+var));
+			
+			location = new OrderedPair<Float>(1*UNIT, var * 3*UNIT);
+			goal = new OrderedPair<Float>(1*UNIT, (numvar*2*numclause + var)*3*UNIT );	
+			vehicles.add( new Vehicle(length, location, goal, startTime, deadline, speed, !startVals.get(var), "x_"+var+"\'"));
+		}
 		
-		OrderedPair location = new OrderedPair(0f, y_offset + 60f + numvar * 60.0f);
-		
-		int length = 10;
-		int speed = 1;
 
-		vehicles.add( new Bit(length, location, speed, direction, startVal) );
-
-		direction = new OrderedPair(0f, 1f);
-		location = new OrderedPair(30f, y_offset + 20f + numvar * 60.0f);
-		vehicles.add( new Vehicle(length, location, speed, direction) );
-		
-		length = 30;
-		
-		direction = new OrderedPair(0f, 1f);
-		location = new OrderedPair(10f, y_offset + numvar * 60.0f);
-		vehicles.add( new Vehicle(length, location, speed, direction) );
-		
-		direction = new OrderedPair(0f, 1f);
-		location = new OrderedPair(40f, y_offset + 30f + numvar * 60.0f);
-		vehicles.add( new Vehicle(length, location, speed, direction) );
-
-		numvar++;
 		Display.getInstance().repaint();
 	}
 	

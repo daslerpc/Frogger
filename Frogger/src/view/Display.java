@@ -28,8 +28,8 @@ public class Display extends JPanel implements MouseListener, MouseMotionListene
 	private static float zoom;
 	
 	private Display() {
-		cameraX = 0;
-		cameraY = 0;
+		cameraX = 50;
+		cameraY = 50;
 		moveCamX = 0;
 		moveCamY = 0;
 		

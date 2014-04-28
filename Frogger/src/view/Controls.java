@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -231,11 +232,15 @@ public class Controls extends JPanel implements ItemListener, ChangeListener, Ac
 			Sim.getInstance().stepSim(timestep);
 			Display.getInstance().repaint();
 		} else if (source == addFVar) {
-			Sim.getInstance().addVariable(false);
+			ArrayList<Boolean> vals = new ArrayList<Boolean>();
+			vals.add(false);
+			Sim.getInstance().addVariables(vals);
 		} else if (source == addRandVar) {
-			Sim.getInstance().addVariable();
+			Sim.getInstance().addVariables(3);
 		} else if (source == addTVar) {
-			Sim.getInstance().addVariable(true);
+			ArrayList<Boolean> vals = new ArrayList<Boolean>();
+			vals.add(true);
+			Sim.getInstance().addVariables(vals);
 		} else if (source == addClause) {
 			Sim.getInstance().addClause();
 		} else if (source == checkCollisions) {

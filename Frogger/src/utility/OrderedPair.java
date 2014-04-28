@@ -1,37 +1,35 @@
 package utility;
 
-public class OrderedPair {
-    private Float first; //first member of pair
-    private Float second; //second member of pair
+public class OrderedPair<T> {
+    private T first; //first member of pair
+    private T second; //second member of pair
 
     public OrderedPair() {
-    	first = new Float(0f);
-    	second = new Float(0f);
     }
     
-    public OrderedPair(Float first, Float second) {
+    public OrderedPair(T first, T second) {
         this.first = first;
         this.second = second;
     }
 
-    public OrderedPair(OrderedPair pair) {
+    public OrderedPair(OrderedPair<T> pair) {
 		first = pair.getFirst();
 		second = pair.getSecond();
 	}
 
-	public void setFirst(Float first) {
+	public void setFirst(T first) {
         this.first = first;
     }
 
-    public void setSecond(Float second) {
+    public void setSecond(T second) {
         this.second = second;
     }
 
-    public Float getFirst() {
+    public T getFirst() {
         return first;
     }
 
-    public Float getSecond() {
+    public T getSecond() {
         return second;
     }
 }
